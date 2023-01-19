@@ -1,8 +1,13 @@
 FROM node:18-alpine
-USER node
-RUN mkdir -p /home/node/app
-WORKDIR /home/node/app
-COPY --chown=node:node ./package.json ./
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
-COPY --chown=node:node ./ ./
+
+COPY . ./
+
 CMD ["npm", "run", "start"]
