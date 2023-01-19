@@ -1,10 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .routers import auth
 
 app = FastAPI()
-
 app.include_router(auth.router)
 
-@app.get("/")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/results/")
 async def root():
-    return {"message": "Welcome to Color Guesser, let's play !"}
+    return [{"name": "Albert", "score": 1}, {"name": "Jeannine", "score": 2}]
