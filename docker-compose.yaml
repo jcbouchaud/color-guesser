@@ -15,8 +15,6 @@ services:
       context: ./client
     ports:
       - "3000:3000"
-    environment:
-      - WDS_SOCKET_PORT=0
     volumes:
       - /home/node/app/node_modules
       - ./client:/home/node/app
