@@ -3,16 +3,14 @@ import Player from "./Player/Player";
 import { useGameContext } from "../../context/GameContext/GameContext";
 
 const GamePage = () => {
-  const { state, handleIncrement, handleDecrement } = useGameContext();
+  const { state, handleIncrement, handleReset } = useGameContext();
 
   return (
     <>
       <div>
         <div onClick={() => handleIncrement()}>Game Page</div>
         <div>{state.score}</div>
-        <div>
-          <Player />
-        </div>
+        <Player />
       </div>
     </>
   );

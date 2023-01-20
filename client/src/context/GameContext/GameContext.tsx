@@ -33,13 +33,13 @@ const GameReducer = (state: GameData, action: GameAction) => {
 interface GameContextProps {
   state: GameData;
   handleIncrement: () => void;
-  handleDecrement: () => void;
+  handleReset: () => void;
 }
 
 export const GameContext = createContext<GameContextProps>({
   state: initialState,
   handleIncrement: () => {},
-  handleDecrement: () => {},
+  handleReset: () => {},
 });
 
 const GameProvider = ({ children }: { children: JSX.Element }) => {
@@ -48,11 +48,11 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
   const handleIncrement = () => {
     dispatch({ type: GameActionKind.INCREMENT_SCORE });
   };
-  const handleDecrement = () => {
-    dispatch({ type: GameActionKind.INCREMENT_SCORE });
+  const handleReset = () => {
+    dispatch({ type: GameActionKind.RESET_SCORE });
   };
 
-  const value = { state, handleIncrement, handleDecrement };
+  const value = { state, handleIncrement, handleReset: handleReset };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 };
