@@ -1,7 +1,9 @@
 import React from "react";
+import withAuthentication from "../../hocs/withAuthentication";
+
 
 const GamePage = () => {
-    return <div>Game Page</div>
+    return <div>GamePage</div>
 }
 
-export default GamePage
+export default withAuthentication(GamePage)
