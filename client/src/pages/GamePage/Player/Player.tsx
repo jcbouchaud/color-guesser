@@ -3,13 +3,16 @@ import Thumbnail from "../Thumbnail/Thumbnail";
 import OptionsList from "../OptionsList/OptionsList";
 
 const Player = () => {
-    return (
-        <>
-            <div><Thumbnail/></div>
-            <div><OptionsList/></div>
-        </>
+  return (
+    <>
+      <div>
+        <Thumbnail />
+      </div>
+      <div>
+        <OptionsList />
+      </div>
+    </>
+  );
+};
 
-    )
-}
-
-export default Player
+export default Player;

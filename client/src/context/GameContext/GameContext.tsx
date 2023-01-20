@@ -42,7 +42,6 @@ export const GameContext = createContext<GameContextProps>({
   handleDecrement: () => {},
 });
 
-
 const GameProvider = ({ children }: { children: JSX.Element }) => {
   const [state, dispatch] = useReducer(GameReducer, initialState);
 
