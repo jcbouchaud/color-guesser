@@ -1,7 +1,13 @@
 import React from "react";
 
-const Option = () => {
-    return <div>Option</div>
+
+type OptionProps = {
+    color: string
+}
+
+
+const Option = ({ color }: OptionProps) => {
+    return <div>{color}</div>
 }
 
 export default Option
