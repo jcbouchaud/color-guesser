@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import auth
+from .routers.users import users
+from .database import database
 
 app = FastAPI()
-app.include_router(auth.router)
+app.include_router(users.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,6 +15,13 @@ app.add_middleware(
 )
 
 
-@app.get("/results/")
-async def root():
-    return [{"name": "Albert", "score": 1}, {"name": "Jeannine", "score": 2}]
+@app.on_event("startup")
+async def startup():
+    if not database.is_connected:
+        await database.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    if database.is_connected:
+        await database.disconnect()
