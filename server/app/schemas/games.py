@@ -1,21 +1,32 @@
-from pydantic import BaseModel
-from typing import List
+from pydantic import BaseModel, UUID4
+from typing import List, Optional
 
 
-class Round(BaseModel):
-    id: int
+class RoundCreate(BaseModel):
     user_answer: str
     right_answer: str
     choices: List[str]
+
+
+class Round(RoundCreate):
+    id: int
 
     class Config:
         orm_mode = True
 
 
-class Game(BaseModel):
-    id: int
+class GameCreate(BaseModel):
+    player_id: UUID4
     score: int = 0
+    on_going: bool = True
+
+
+class GameStatusUpdate(BaseModel):
     on_going: bool = False
+
+
+class Game(GameCreate):
+    id: int
     rounds: List[Round]
 
     class Config:

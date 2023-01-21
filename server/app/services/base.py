@@ -3,7 +3,6 @@ import sqlalchemy
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from starlette.exceptions import HTTPException
-
 from app.models.base import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
