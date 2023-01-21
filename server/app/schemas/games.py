@@ -37,6 +37,6 @@ class GameCreateBody(BaseModel):
     user_id: str
 
 
-class GameUpdateGameBody(BaseModel):
+class GameUpdateBody(BaseModel):
     game_id: str
     round: RoundCreate
