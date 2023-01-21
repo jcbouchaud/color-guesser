@@ -1,8 +1,15 @@
-from pydantic import BaseSettings, Field
+from pydantic import BaseSettings, PostgresDsn
 
 
 class Settings(BaseSettings):
-    db_url: str = Field(..., env='DATABASE_URL')
+    db_url: PostgresDsn
+
+    class Config:
+        fields = {
+            'db_url': {
+                'env': 'DATABASE_URL',
+            },
+        }
 
 
 settings = Settings()
