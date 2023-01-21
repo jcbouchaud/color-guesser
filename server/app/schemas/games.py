@@ -1,5 +1,5 @@
 from pydantic import BaseModel, UUID4
-from typing import List, Optional
+from typing import List
 
 
 class RoundCreate(BaseModel):
@@ -31,3 +31,12 @@ class Game(GameCreate):
 
     class Config:
         orm_mode = True
+
+
+class GameCreateBody(BaseModel):
+    user_id: str
+
+
+class GameUpdateGameBody(BaseModel):
+    game_id: str
+    round: RoundCreate
