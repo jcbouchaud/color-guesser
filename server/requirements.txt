@@ -8,6 +8,7 @@ alembic==1.9.2
 databases[postgresql]==0.7.0
 python-dotenv==0.21.1
 pytest==7.2.1
+pytest-asyncio==0.20.3
 faker==16.6.0
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0

@@ -1,4 +1,3 @@
-import json
 from pydantic import UUID4
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
@@ -7,7 +6,6 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from app.config import settings
-from app.schemas.auth import TokenData
 from app.schemas.users import UserCreate
 from app.services.users import UsersService
 from app.models.users import User as UserModel
@@ -15,9 +13,7 @@ from app.models.users import User as UserModel
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-SECRET_KEY = settings.secret_key
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 async def verify_token(token: str = Depends(oauth2_scheme)):
@@ -28,7 +24,7 @@ async def verify_token(token: str = Depends(oauth2_scheme)):
     )
     try:
         token = token.split("Bearer ")[-1]
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
         if payload.get("sub") is None:
             raise credentials_exception
     except JWTError:
@@ -45,10 +41,10 @@ def get_password_hash(password):
 
 
 def authenticate_user(db: Session, username: str, password: str) -> UserModel:
-    user = UsersService(db).get_by_username(username)
+    user = UsersService(db).get_from_alias(username)
     if not user:
         return False
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password, user.password):
         return False
     return user
 
@@ -64,5 +60,5 @@ def create_access_token(sub: UUID4, expires_delta: timedelta | None = None):
     else:
         expire = datetime.utcnow() + timedelta(minutes=15)
 
-    encoded_jwt = jwt.encode({"sub": str(sub), "exp": expire}, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode({"sub": str(sub), "exp": expire}, settings.SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt

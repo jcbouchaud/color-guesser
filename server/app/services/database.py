@@ -3,13 +3,13 @@ from sqlalchemy.orm import sessionmaker
 import databases
 from app.config import settings
 
-SQLALCHEMY_DATABASE_URL = settings.database_url
+SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-database = databases.Database(settings.database_url)
+database = databases.Database(settings.DATABASE_URL)
 metadata = MetaData()
 
 
