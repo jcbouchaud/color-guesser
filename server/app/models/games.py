@@ -14,7 +14,7 @@ class Game(Base):
     on_going = Column(Boolean, default=False)
     player_id = Column(ForeignKey("users.id"))
     player = relationship("User", back_populates="games")
-    rounds = relationship("Round", back_populates="game")
+    rounds = relationship("Round", back_populates="game", cascade="all, delete-orphan")
 
 
 class Round(Base):

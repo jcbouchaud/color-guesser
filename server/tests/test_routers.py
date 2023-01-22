@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.schemas.games import GameCreateBody, GameUpdateBody, Game
-from app.schemas.users import  User, AuthenticatedUser
+from app.schemas.users import User, AuthenticatedUser
 
 
 client = TestClient(app)
@@ -46,7 +46,7 @@ def test_update_game_lost_round(fake_user_token, fake_game, fake_lost_round):
 
 
 def test_login(fake_user, password):
-    response = client.post("/login/", data={"username": fake_user.alias, "password": password}, headers={"Content-Type": "application/x-www-form-urlencoded"})
+    response = client.post("/auth/login/", data={"username": fake_user.alias, "password": password}, headers={"Content-Type": "application/x-www-form-urlencoded"})
 
     assert response.status_code == 200
     assert AuthenticatedUser.parse_obj(response.json())
@@ -54,7 +54,7 @@ def test_login(fake_user, password):
 
 def test_register(password):
     new_user = json.dumps({"alias": Faker().first_name(), "password": password})
-    response = client.post("/register/", content=new_user)
+    response = client.post("/auth/register/", content=new_user)
 
     assert response.status_code == 201
     assert AuthenticatedUser.parse_obj(response.json())

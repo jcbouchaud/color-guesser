@@ -10,16 +10,16 @@ from app.schemas.auth import TokenData
 from app.services.games import GamesService
 
 
-router = APIRouter(tags=["games"])
+router = APIRouter(tags=["games"], prefix="/games")
 
 
-@router.post("/games/", status_code=201, response_model=Game)
+@router.post("/", status_code=201, response_model=Game)
 def create_game(body:  GameCreateBody, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
     service = GamesService(db)
     return service.create_game(body.user_id)
 
 
-@router.patch("/games/", status_code=200, response_model=Game)
+@router.patch("/", status_code=200, response_model=Game)
 def update_game(body:  GameUpdateBody, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
     service = GamesService(db)
     return service.update_game(body.game_id, body.round)

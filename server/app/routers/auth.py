@@ -10,7 +10,7 @@ from app.schemas.auth import Token
 from app.dependencies.auth import authenticate_user, register_user, create_access_token
 
 
-router = APIRouter(tags=["auth"])
+router = APIRouter(tags=["auth"], prefix="/auth")
 
 
 @router.post("/login", response_model=AuthenticatedUser)

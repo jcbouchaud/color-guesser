@@ -10,10 +10,10 @@ from app.services.base import BaseService
 from app.models.users import User as UserModel
 
 
-router = APIRouter(tags=["users"])
+router = APIRouter(tags=["users"], prefix="/users")
 
 
-@router.get("/users/{user_id}/", status_code=200, response_model=User)
+@router.get("/{user_id}/", status_code=200, response_model=User)
 def get_user(user_id: UUID4, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
     service = BaseService(UserModel, db)
     return service.get(user_id)
