@@ -1,6 +1,8 @@
 from pydantic import BaseModel, UUID4
 from typing import List
 
+from app.schemas.schemas import CamelResponse
+
 
 class RoundCreate(BaseModel):
     user_answer: str
@@ -25,12 +27,9 @@ class GameStatusUpdate(BaseModel):
     on_going: bool = False
 
 
-class Game(GameCreate):
+class Game(GameCreate, CamelResponse):
     id: UUID4
     rounds: List[Round]
-
-    class Config:
-        orm_mode = True
 
 
 class GameCreateBody(BaseModel):

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from app.dependencies.auth import verify_token
 from app.schemas.auth import TokenData
 from app.services.database import get_db
-from app.schemas.users import User, UserCreate
+from app.schemas.users import User
 from app.services.base import BaseService
 from app.models.users import User as UserModel
 

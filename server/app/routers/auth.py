@@ -19,14 +19,14 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect alias or password",
+            detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         sub=user.id, expires_delta=access_token_expires
     )
-    token = Token(access_token=access_token, token_type="bearer")
+    token = Token(access_token=access_token, token_type="Bearer")
     return AuthenticatedUser(**User.from_orm(user).dict(), token=token)
 
 
@@ -37,5 +37,5 @@ async def register(data: UserCreate, db: Session = Depends(get_db)):
     access_token = create_access_token(
         sub=user.id, expires_delta=access_token_expires
     )
-    token = Token(access_token=access_token, token_type="bearer")
+    token = Token(access_token=access_token, token_type="Bearer")
     return AuthenticatedUser(**User.from_orm(user).dict(), token=token)

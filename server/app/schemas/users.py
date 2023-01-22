@@ -3,22 +3,20 @@ from pydantic import BaseModel, UUID4
 
 from .auth import Token
 from .games import Game
+from .schemas import CamelResponse
 
 
 class UserCreate(BaseModel):
-    alias: str
+    username: str
     password: str
 
 
-class User(UserCreate):
+class User(UserCreate, CamelResponse):
     id: UUID4
     games: List[Game]
     best_score: int = 0
 
-    class Config:
-        orm_mode = True
 
-
-class AuthenticatedUser(User):
+class AuthenticatedUser(User, CamelResponse):
     token: Token
 

@@ -16,9 +16,9 @@ def session():
 
 
 @pytest.fixture
-def fake_alias():
-    alias = Faker().first_name()
-    yield alias
+def fake_username():
+    username = Faker().first_name()
+    yield username
 
 
 @pytest.fixture
@@ -27,8 +27,8 @@ def password():
 
 
 @pytest.fixture
-def fake_user(fake_alias, password, session):
-    new_user = UserCreate(alias=fake_alias, password=get_password_hash(password))
+def fake_user(fake_username, password, session):
+    new_user = UserCreate(username=fake_username, password=get_password_hash(password))
     service = UsersService(session)
     user_db = service.create(new_user)
     yield user_db

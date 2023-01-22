@@ -46,14 +46,14 @@ def test_update_game_lost_round(fake_user_token, fake_game, fake_lost_round):
 
 
 def test_login(fake_user, password):
-    response = client.post("/auth/login/", data={"username": fake_user.alias, "password": password}, headers={"Content-Type": "application/x-www-form-urlencoded"})
+    response = client.post("/auth/login/", data={"username": fake_user.username, "password": password}, headers={"Content-Type": "application/x-www-form-urlencoded"})
 
     assert response.status_code == 200
     assert AuthenticatedUser.parse_obj(response.json())
 
 
 def test_register(password):
-    new_user = json.dumps({"alias": Faker().first_name(), "password": password})
+    new_user = json.dumps({"username": Faker().first_name(), "password": password})
     response = client.post("/auth/register/", content=new_user)
 
     assert response.status_code == 201

@@ -1,5 +1,7 @@
-from pydantic import BaseModel, UUID4, SecretStr
+from pydantic import BaseModel, UUID4
 from typing import Optional
+
+from app.schemas.schemas import CamelResponse
 
 
 class TokenData(BaseModel):
@@ -7,6 +9,6 @@ class TokenData(BaseModel):
     exp: Optional[str]
 
 
-class Token(BaseModel):
+class Token(CamelResponse):
     access_token: str
     token_type: str

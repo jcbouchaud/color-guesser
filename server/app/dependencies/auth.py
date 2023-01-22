@@ -41,7 +41,7 @@ def get_password_hash(password):
 
 
 def authenticate_user(db: Session, username: str, password: str) -> UserModel:
-    user = UsersService(db).get_from_alias(username)
+    user = UsersService(db).get_from_username(username)
     if not user:
         return False
     if not verify_password(password, user.password):
