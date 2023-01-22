@@ -6,7 +6,7 @@ import { useGameContext } from "../../context/GameContext/GameContext";
 const GamePage = () => {
   const { gameData } = useGameContext();
 
-  if (gameData.id) {
+  if (!gameData.id) {
     return <StartGameScreen />;
   }
 

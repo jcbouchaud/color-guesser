@@ -1,15 +1,16 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { GameContextProps, GameActionKind, GameData, Round } from "./types";
+import { GameContextProps, GameActionKind, GameData } from "./types";
 import { GameReducer } from "./reducer";
 import api from "../../services/api";
+import { setGame } from "./utils";
 
 const initialState = {
-  id: "",
+  id: "123456",
   score: 0,
   round: {
     userAnswer: "",
-    rightAnswer: "",
-    choices: []
+    rightAnswer: "3",
+    choices: ["1", "2", "3"],
   },
 };
 
@@ -19,7 +20,7 @@ export const GameContext = createContext<GameContextProps>({
   handleReset: () => {},
   handleCreateGame: async () => {},
   handleSetGame: () => {},
-  handleSubmitAnswer: () => {}
+  handleSubmitAnswer: () => {},
 });
 
 const GameProvider = ({ children }: { children: JSX.Element }) => {
@@ -34,34 +35,33 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
 
   const handleCreateGame = async (userId: string) => {
     const game = await api.createGame(userId);
-    dispatch({type: GameActionKind.CREATE_GAME, payload: game})
-  }
+    dispatch({ type: GameActionKind.CREATE_GAME, payload: game });
+  };
 
   const handleSetGame = (game: GameData) => {
-    dispatch({type: GameActionKind.SET_GAME, payload: game})
-  }
+    dispatch({ type: GameActionKind.SET_GAME, payload: game });
+  };
 
   const handleSubmitAnswer = async (answer: string) => {
     const game = await api.submitAnswer(gameData.id, {
       userAnswer: answer,
       rightAnswer: gameData.round.rightAnswer,
-      choices: gameData.round.choices
-    })
+      choices: gameData.round.choices,
+    });
 
-    // TODO: Generate new round
-    const newGame = {
-      id: game.id,
-      score: game.score,
-      round : {
-        rightAnswer: "",
-        choices: []
-      }
-    }
+    const updatedGame: GameData = setGame(game)
 
-    dispatch({type: GameActionKind.SET_NEW_ROUND, payload: newGame})
-  }
+    dispatch({ type: GameActionKind.SET_NEW_ROUND, payload: updatedGame });
+  };
 
-  const value = { gameData, handleIncrement, handleReset, handleCreateGame, handleSetGame, handleSubmitAnswer };
+  const value = {
+    gameData,
+    handleIncrement,
+    handleReset,
+    handleCreateGame,
+    handleSetGame,
+    handleSubmitAnswer,
+  };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 };
