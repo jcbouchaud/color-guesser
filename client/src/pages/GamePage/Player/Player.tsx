@@ -5,12 +5,8 @@ import OptionsList from "../OptionsList/OptionsList";
 const Player = () => {
   return (
     <>
-      <div>
-        <Thumbnail />
-      </div>
-      <div>
-        <OptionsList />
-      </div>
+      <Thumbnail />
+      <OptionsList />
     </>
   );
 };

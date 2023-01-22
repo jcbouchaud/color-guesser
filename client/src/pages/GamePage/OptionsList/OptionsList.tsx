@@ -8,8 +8,7 @@ const OptionsList = () => {
   return (
     <>
       <div>
-        {gameData.rounds[0] &&
-          gameData.rounds[0].choices.map((x, index) => (
+        {gameData.round.choices.map((x, index) => (
             <Option key={index} color={x} />
           ))}
       </div>
