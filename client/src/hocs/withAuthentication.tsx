@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 const withAuthentication = <P extends object>(Component: ComponentType<P>,
 ): FC<P> => (props) => {
-    const isAuthenticated = true;
+    const isAuthenticated = false;
     if (isAuthenticated) {
       return <Component {...props as P} />;
     }

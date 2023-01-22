@@ -4,6 +4,7 @@ import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import GamePage from "./pages/GamePage/GamePage";
 import GameProvider from "./context/GameContext/GameContext";
+import UserProvider from "./context/UserContext/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }
 
 export default App;

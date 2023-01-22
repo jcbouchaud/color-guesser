@@ -4,13 +4,13 @@ import withAuthentication from "../../hocs/withAuthentication";
 
 const WelcomePage = () => {
   const [results, setResults] = useState<Array<any>>([]);
-  const getResults = () => {
-    api.fetchResults().then((res) => setResults(res.data));
-  };
+  // const getResults = () => {
+  //   api.fetchResults().then((res) => setResults(res.data));
+  // };
 
-  useEffect(() => {
-    getResults();
-  }, []);
+  // useEffect(() => {
+  //   getResults();
+  // }, []);
 
   return (
     <>
