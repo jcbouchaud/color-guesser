@@ -1,19 +1,16 @@
 import withAuthentication from "../../hocs/withAuthentication";
 import Player from "./Player/Player";
+import StartGameScreen from "./StartGameScreen/StartGameScreen";
 import { useGameContext } from "../../context/GameContext/GameContext";
 
 const GamePage = () => {
-  const { state, handleIncrement, handleReset } = useGameContext();
+  const { gameData } = useGameContext();
 
-  return (
-    <>
-      <div>
-        <div onClick={() => handleIncrement()}>Game Page</div>
-        <div>{state.score}</div>
-        <Player />
-      </div>
-    </>
-  );
+  if (gameData.id) {
+    return <StartGameScreen />;
+  }
+
+  return <Player />;
 };
 
 export default withAuthentication(GamePage);

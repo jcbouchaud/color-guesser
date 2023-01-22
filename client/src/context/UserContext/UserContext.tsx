@@ -1,57 +1,63 @@
-import React, { createContext, Dispatch, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+import { UserReducer } from "./reducer";
+import { UserContextProps, UserActionKind, UserDataType } from "./types";
 import api from "../../services/api";
 
-interface UserData {
-  username: string;
-  password: string;
-  token: string;
-}
-
-const initialState: UserData = {
+const initialState: UserDataType = {
+  id: "",
   username: "",
   password: "",
-
-  token: ""
-};
-
-enum UserActionKind {
-  SET_USER_INFOS = "SET_USER_INFOS",
-}
-
-interface UserAction {
-  type: UserActionKind;
-  payload: any;
-}
-
-const UserReducer = (state: UserData, action: UserAction) => {
-  switch (action.type) {
-    case UserActionKind.SET_USER_INFOS:
-      return { ...state, ...action.payload };
-    default:
-      return state;
-  }
-};
-
-interface UserContextProps {
-  state: UserData;
-  handleLogin: (username: string, password: string) => Promise<void>;
-}
-
-export const UserContext = createContext<UserContextProps>({
-  state: initialState,
-  handleLogin: async () => {
+  token: {
+    accessToken: "",
+    tokenType: "",
   },
+};
+
+let UserContext: React.Context<UserContextProps>;
+
+UserContext = createContext<UserContextProps>({
+  userData: initialState,
+  handleAuth: async () => {},
+  fetchUser: async () => {},
+  setToken: () => {},
 });
 
 const UserProvider = ({ children }: { children: JSX.Element }) => {
-  const [state, dispatch] = useReducer(UserReducer, initialState);
+  const [userData, dispatch] = useReducer(UserReducer, initialState);
 
-  const handleLogin = async (username: string, password: string) => {
-    const res = await api.login(username, password)
-    dispatch({ type: UserActionKind.SET_USER_INFOS, payload: res.data });
+  const handleAuth = async (
+    username: string,
+    password: string,
+    registered: boolean
+  ) => {
+    let user: UserDataType;
+
+    if (registered) {
+      user = await api.login(username, password);
+    } else {
+      user = await api.register(username, password);
+    }
+    dispatch({ type: UserActionKind.SET_USER_INFOS, payload: user });
+
+    // TODO: Build a route to decode token and get user id
+    window.localStorage.setItem("user_id", user.id);
+    window.localStorage.setItem(
+      "jwt_token",
+      `${user.token.tokenType} ${user.token.accessToken}`
+    );
   };
 
-  const value = { state, handleLogin };
+  const fetchUser = async () => {
+    const user = await api.fetchUser();
+    dispatch({ type: UserActionKind.SET_USER_INFOS, payload: user });
+  };
+
+  const setToken = async () => {
+    const token = window.localStorage.getItem("jwt_token");
+    dispatch({ type: UserActionKind.SET_TOKEN, payload: token });
+  };
+
+  const value = { userData, handleAuth, fetchUser, setToken };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
