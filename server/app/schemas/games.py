@@ -9,7 +9,7 @@ class RoundCreate(BaseModel):
 
 
 class Round(RoundCreate):
-    id: int
+    id: UUID4
 
     class Config:
         orm_mode = True
@@ -26,7 +26,7 @@ class GameStatusUpdate(BaseModel):
 
 
 class Game(GameCreate):
-    id: int
+    id: UUID4
     rounds: List[Round]
 
     class Config:
@@ -34,9 +34,9 @@ class Game(GameCreate):
 
 
 class GameCreateBody(BaseModel):
-    user_id: str
+    user_id: UUID4
 
 
 class GameUpdateBody(BaseModel):
-    game_id: str
+    game_id: UUID4
     round: RoundCreate

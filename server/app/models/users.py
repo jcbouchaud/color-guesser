@@ -13,3 +13,4 @@ class User(Base):
     alias = Column(String, unique=True, index=True)
     games = relationship("Game", back_populates="player")
     best_score = Column(Integer, default=0)
+    password = Column(String)

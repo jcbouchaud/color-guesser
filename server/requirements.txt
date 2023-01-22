@@ -5,7 +5,9 @@ sqlalchemy==1.4.46
 psycopg2-binary==2.9.5
 asyncpg==0.27.0
 alembic==1.9.2
-databases==0.7.0
-databases[postgresql]
+databases[postgresql]==0.7.0
 python-dotenv==0.21.1
 pytest==7.2.1
+faker==16.6.0
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.3.0

@@ -15,10 +15,9 @@ class GamesService(BaseService):
         db_game = self.create(GameCreate(player_id=db_user.id))
         return db_game
 
-    def update_game(self, game_id: str, game_round: RoundCreate):
+    def update_game(self, game_id: UUID4, game_round: RoundCreate):
         db_game = self.get(game_id)
-        db_round = RoundModel(game_round)
-        db_game.rounds.append(game_round)
+        self.add_round(db_game, game_round)
 
         user_id = db_game.player_id
 
@@ -29,14 +28,21 @@ class GamesService(BaseService):
             if db_game.score > db_user.best_score:
                 db_user.best_score = db_game.score
 
+            self.db_session.commit()
             result = db_game
 
         else:
-            self.update(GameStatusUpdate())
+            self.update(db_game.id, GameStatusUpdate())
             new_db_game = self.create(GameCreate(player_id=user_id))
             result = new_db_game
 
-        self.db_session.commit()
         return result
+
+    def add_round(self, db_game: GameModel, game_round: RoundCreate):
+        db_round = RoundModel(**game_round.dict())
+        db_game.rounds.append(db_round)
+        self.db_session.commit()
+
+
 
 
