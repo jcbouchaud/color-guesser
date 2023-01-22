@@ -4,17 +4,10 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.schemas.games import GameCreateBody, GameUpdateBody, Game
-from app.schemas.users import UserCreate, User, AuthenticatedUser
+from app.schemas.users import  User, AuthenticatedUser
+
 
 client = TestClient(app)
-
-
-def test_create_user(password):
-    new_user = UserCreate(alias=Faker().first_name(), password=password)
-    response = client.post("/users/", content=new_user.json())
-
-    assert response.status_code == 201
-    assert User.parse_obj(response.json())
 
 
 def test_get_user(fake_user, fake_user_token):

@@ -13,12 +13,6 @@ from app.models.users import User as UserModel
 router = APIRouter(tags=["users"])
 
 
-@router.post("/users/", status_code=201, response_model=User)
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    service = BaseService(UserModel, db)
-    return service.create(user)
-
-
 @router.get("/users/{user_id}/", status_code=200, response_model=User)
 def get_user(user_id: UUID4, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
     service = BaseService(UserModel, db)
