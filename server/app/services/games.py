@@ -42,7 +42,3 @@ class GamesService(BaseService):
         db_round = RoundModel(**game_round.dict())
         db_game.rounds.append(db_round)
         self.db_session.commit()
-
-
-
-

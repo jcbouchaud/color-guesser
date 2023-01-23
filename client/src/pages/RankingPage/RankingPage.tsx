@@ -12,6 +12,15 @@ const StyledUsersList = styled.div`
   align-content: center;
 `;
 
+const StyledTopText = styled.div`
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "Roboto Light";
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
 export interface UserWithScore {
   username: string;
   bestScore: number;
@@ -31,6 +40,9 @@ const RankingPage = () => {
   return (
     <Page>
       <StyledUsersList>
+        <StyledTopText>
+          TOP 10
+        </StyledTopText>
         {results.map((result, index) => {
           return <UserRow key={index} {...result} />;
         })}

@@ -49,11 +49,15 @@ def fake_game(fake_user, session):
 
 @pytest.fixture
 def fake_won_round():
-    game_round = RoundCreate(user_answer="foo", right_answer="foo", choices=["foo", "bar"])
+    game_round = RoundCreate(
+        user_answer="foo", right_answer="foo", choices=["foo", "bar"]
+    )
     yield game_round
 
 
 @pytest.fixture
 def fake_lost_round():
-    game_round = RoundCreate(user_answer="foo", right_answer="bar", choices=["foo", "bar"])
+    game_round = RoundCreate(
+        user_answer="foo", right_answer="bar", choices=["foo", "bar"]
+    )
     yield game_round

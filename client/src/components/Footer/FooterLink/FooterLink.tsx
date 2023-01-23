@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-interface StyledHeaderLinkProps {
+interface StyledFooterLinkProps {
   path: string;
   name: string;
 }
 
-export const StyledHeaderLink = styled.div`
+export const StyledFooterLink = styled.div`
   margin-right: 30px;
   min-width: 60px;
   font-family: "Roboto Light";
@@ -19,12 +19,12 @@ export const StyledHeaderLink = styled.div`
   }
 `;
 
-const HeaderLink = ({ path, name }: StyledHeaderLinkProps) => {
+const FooterLink = ({ path, name }: StyledFooterLinkProps) => {
   return (
-    <StyledHeaderLink color={"purple"}>
+    <StyledFooterLink color={"purple"}>
       <Link to={path}>{name}</Link>
-    </StyledHeaderLink>
+    </StyledFooterLink>
   );
 };
 
-export default HeaderLink;
+export default FooterLink;

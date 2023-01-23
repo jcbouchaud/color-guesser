@@ -3,7 +3,7 @@ import React from "react";
 import { useGameContext } from "../../context/GameContext/GameContext";
 
 const StyledPaged = styled.div`
-  width: 100%;
+  width: calc(100% - 15px);
   height: calc(100vh - 90px);
   display: flex;
   justify-content: center;

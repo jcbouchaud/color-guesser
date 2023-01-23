@@ -13,6 +13,7 @@ config = context.config
 # this will overwrite the ini-file sqlalchemy.url path
 # with the path given in the config of the main code
 from app.config import settings
+
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 # Interpret the config file for Python logging.
@@ -28,6 +29,7 @@ if config.config_file_name is not None:
 from app.models.base import Base
 from app.models.users import *
 from app.models.games import *
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -74,9 +76,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

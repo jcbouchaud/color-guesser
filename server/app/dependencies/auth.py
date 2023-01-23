@@ -60,5 +60,7 @@ def create_access_token(sub: UUID4, expires_delta: timedelta | None = None):
     else:
         expire = datetime.utcnow() + timedelta(minutes=15)
 
-    encoded_jwt = jwt.encode({"sub": str(sub), "exp": expire}, settings.SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(
+        {"sub": str(sub), "exp": expire}, settings.SECRET_KEY, algorithm=ALGORITHM
+    )
     return encoded_jwt

@@ -15,7 +15,11 @@ router = APIRouter(tags=["users"], prefix="/users")
 
 
 @router.get("/{user_id}/", status_code=200, response_model=User)
-def get_user(user_id: UUID4, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
+def get_user(
+    user_id: UUID4,
+    db: Session = Depends(get_db),
+    payload: TokenData = Depends(verify_token),
+):
     service = UsersService(db)
     return service.get(user_id)
 

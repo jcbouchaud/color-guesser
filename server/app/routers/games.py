@@ -1,4 +1,3 @@
-from pydantic import UUID4, BaseModel
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -14,12 +13,20 @@ router = APIRouter(tags=["games"], prefix="/games")
 
 
 @router.post("/", status_code=201, response_model=Game)
-def create_game(body:  GameCreateBody, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
+def create_game(
+    body: GameCreateBody,
+    db: Session = Depends(get_db),
+    payload: TokenData = Depends(verify_token),
+):
     service = GamesService(db)
     return service.create_game(body.user_id)
 
 
 @router.patch("/", status_code=200, response_model=Game)
-def update_game(body:  GameUpdateBody, db: Session = Depends(get_db), payload: TokenData = Depends(verify_token)):
+def update_game(
+    body: GameUpdateBody,
+    db: Session = Depends(get_db),
+    payload: TokenData = Depends(verify_token),
+):
     service = GamesService(db)
     return service.update_game(body.game_id, body.round)

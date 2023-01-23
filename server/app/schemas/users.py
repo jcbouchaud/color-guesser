@@ -24,4 +24,3 @@ class AuthenticatedUser(User, CamelResponse):
 class DisplayUser(CamelResponse):
     username: str
     best_score: int
-

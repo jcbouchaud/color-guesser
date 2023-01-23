@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import FormControl from "@mui/material/FormControl";
-import AuthInput from "./AuthInput/AuthInput";
-import PasswordIcon from "@mui/icons-material/Password";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { useUserContext } from "../../context/UserContext/UserContext";
 import { Navigate } from "react-router-dom";
-import Button from "@mui/material/Button";
+import { FormControl,  Box, Button } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import AuthInput from "./AuthInput/AuthInput";
 import Page from "../../components/Page/Page";
+import { useUserContext } from "../../context/UserContext/UserContext";
 
 export interface formStateInterface {
   username: string;
@@ -37,7 +33,6 @@ const AuthPage = () => {
     if (formState?.username && formState.password) {
       setLoading(true);
       await handleAuth(formState?.username, formState?.password, isRegistered);
-      setLoading(false);
     }
   };
 

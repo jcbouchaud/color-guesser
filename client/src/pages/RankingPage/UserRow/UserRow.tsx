@@ -3,9 +3,7 @@ import styled from "styled-components";
 
 const StyledUserRow = styled.div`
   min-width: 300px;
-  border: 1px solid black;
   height: 50px;
-  border-radius: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,7 +20,7 @@ const UserRow = ({ username, bestScore }: UserWithScore) => {
   return (
     <StyledUserRow color={"purple"}>
       <div>{username} </div>
-      <div style={{fontWeight: "bold"}}>{bestScore} points</div>
+      <div style={{fontWeight: "bold"}}>{bestScore} {bestScore > 1 ? "points" : "point"}</div>
     </StyledUserRow>
   );
 };

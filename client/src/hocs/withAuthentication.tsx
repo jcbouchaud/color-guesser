@@ -2,7 +2,7 @@ import React, { ComponentType, FC, useCallback, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext/UserContext";
 import { useGameContext } from "../context/GameContext/GameContext";
-import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 const withAuthentication =
   <P extends object>(Component: ComponentType<P>): FC<P> =>
@@ -16,23 +16,26 @@ const withAuthentication =
       if (user.games.length) {
         handleSetGame(user.games.reverse()[0]);
       }
-    }, []);
+    }, [fetchUser, handleSetGame]);
 
-    if (token) {
-      useEffect(() => {
+    useEffect(() => {
+      if (token) {
         if (!userData.token.accessToken) setToken();
         if (!userData.id || !gameData.id) {
           setDataFromUser();
         }
-      }, []);
-      return (
-        <>
-          <Header />
-          <Component {...(props as P)} />
-        </>
-      );
+      }
+    }, []);
+
+    if (!token) {
+      return <Navigate to={{ pathname: "/auth/" }} />;
     }
-    return <Navigate to={{ pathname: "/auth/" }} />;
+    return (
+      <>
+        <Component {...(props as P)} />
+        <Footer />
+      </>
+    );
   };
 
 export default withAuthentication;

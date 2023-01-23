@@ -16,11 +16,11 @@ class UsersService(BaseService):
         return user
 
     def list_top_ten(self):
-        users = self.db_session.query(self.model)\
-            .filter(self.model.best_score > 0)\
-            .order_by(desc("best_score"))\
-            .limit(10)\
+        users = (
+            self.db_session.query(self.model)
+            .filter(self.model.best_score > 0)
+            .order_by(desc("best_score"))
+            .limit(10)
             .all()
+        )
         return users
-
-

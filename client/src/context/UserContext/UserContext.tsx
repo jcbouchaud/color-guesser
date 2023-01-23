@@ -60,9 +60,9 @@ const UserProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   const handleResetUser = () => {
+    dispatch({ type: UserActionKind.RESET_STATE, payload: initialState });
     window.localStorage.removeItem("user_id")
     window.localStorage.removeItem("jwt_token")
-    dispatch({ type: UserActionKind.RESET_STATE, payload: initialState });
   };
 
   const value = { userData, handleAuth, fetchUser, setToken, handleResetUser };
