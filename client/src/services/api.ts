@@ -86,5 +86,19 @@ const api = {
       })
       .catch((err) => err);
   },
+  fetchTopTen: async () => {
+    const URL = `http://localhost:8000/users/`;
+
+    return await axios
+      .get(URL, {
+        headers: { Authorization: window.localStorage.getItem("jwt_token") },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.data;
+        }
+      })
+      .catch((err) => err);
+  },
 };
 export default api;
