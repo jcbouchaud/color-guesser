@@ -10,7 +10,7 @@ const CustomHeader = styled.header`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-bottom: ${props => `1px solid ${props.color}`};
+  border-bottom: ${(props) => `1px solid ${props.color}`};
 `;
 
 const Header = () => {
@@ -31,7 +31,9 @@ const Header = () => {
       {paths.map((x, index) => (
         <HeaderLink key={index} path={x.path} name={x.name} />
       ))}
-      <StyledHeaderLink onClick={() => handleLogout()} color="purple"><Link to={"/"}>{"<logout>"}</Link></StyledHeaderLink>
+      <StyledHeaderLink onClick={() => handleLogout()} color="purple">
+        <Link to={"/"}>{"<logout>"}</Link>
+      </StyledHeaderLink>
     </CustomHeader>
   );
 };
