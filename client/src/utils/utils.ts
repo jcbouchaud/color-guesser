@@ -1,4 +1,4 @@
-import { GameData, Round } from "./types";
+import { GameData, Round } from "../context/GameContext/types";
 
 const getRandomInt = (length: number) => {
   return Math.floor(Math.random() * length);
@@ -28,7 +28,6 @@ const setNewRound = (length: number) => {
 };
 
 export const setGame = (game: GameData) => {
-  // TODO: Generate new round
   const newGame = {
     id: game.id,
     score: game.score,

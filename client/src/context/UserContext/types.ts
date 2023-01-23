@@ -23,6 +23,6 @@ export interface UserAction {
 export interface UserContextProps {
   userData: UserDataType;
   handleAuth: (username: string, password: string, registered: boolean) => void;
-  fetchUser: () => void
+  fetchUser: () => Promise<any>
   setToken: () => void
 }

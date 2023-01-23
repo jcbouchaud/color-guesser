@@ -2,15 +2,15 @@ import React, { createContext, useContext, useReducer } from "react";
 import { GameContextProps, GameActionKind, GameData } from "./types";
 import { GameReducer } from "./reducer";
 import api from "../../services/api";
-import { setGame } from "./utils";
+import { setGame } from "../../utils/utils";
 
 const initialState = {
-  id: "123456",
+  id: "",
   score: 0,
   round: {
     userAnswer: "",
-    rightAnswer: "3",
-    choices: ["1", "2", "3"],
+    rightAnswer: "",
+    choices: [],
   },
 };
 
@@ -35,11 +35,14 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
 
   const handleCreateGame = async (userId: string) => {
     const game = await api.createGame(userId);
-    dispatch({ type: GameActionKind.CREATE_GAME, payload: game });
+    const newGame = setGame(game)
+    dispatch({ type: GameActionKind.CREATE_GAME, payload: newGame });
   };
 
   const handleSetGame = (game: GameData) => {
-    dispatch({ type: GameActionKind.SET_GAME, payload: game });
+    const updatedGame: GameData = setGame(game)
+    console.log(updatedGame)
+    dispatch({ type: GameActionKind.SET_GAME, payload: updatedGame });
   };
 
   const handleSubmitAnswer = async (answer: string) => {

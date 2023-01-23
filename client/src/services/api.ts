@@ -36,7 +36,7 @@ const api = {
     return await axios
       .post(
         URL,
-        { "user_id": userId },
+        { user_id: userId },
         { headers: { Authorization: window.localStorage.getItem("jwt_token") } }
       )
       .then((res) => {
@@ -50,7 +50,20 @@ const api = {
     const URL = "http://localhost:8000/games/";
 
     return await axios
-      .patch(URL, { gameId, round })
+      .patch(
+        URL,
+        {
+          game_id: gameId,
+          round: {
+            ...round,
+            user_answer: round.userAnswer,
+            right_answer: round.rightAnswer,
+          },
+        },
+        {
+          headers: { Authorization: window.localStorage.getItem("jwt_token") },
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           return res.data;

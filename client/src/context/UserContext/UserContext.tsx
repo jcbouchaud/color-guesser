@@ -50,6 +50,7 @@ const UserProvider = ({ children }: { children: JSX.Element }) => {
   const fetchUser = async () => {
     const user = await api.fetchUser();
     dispatch({ type: UserActionKind.SET_USER_INFOS, payload: user });
+    return user
   };
 
   const setToken = async () => {
