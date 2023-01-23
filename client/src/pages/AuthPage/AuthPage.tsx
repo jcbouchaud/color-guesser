@@ -7,6 +7,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useUserContext } from "../../context/UserContext/UserContext";
 import { Navigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export interface formStateInterface {
   username: string;
@@ -25,7 +26,11 @@ const AuthPage = () => {
     useState<formStateInterface>(initialFormState);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const [isRegistered, setIsRegistered] = useState<boolean>(true);
+
+  const toggleAuthStatus = () => {
+    setIsRegistered(!isRegistered);
+  };
 
   const submitAuth = async () => {
     if (formState?.username && formState.password) {
@@ -48,6 +53,7 @@ const AuthPage = () => {
   return (
     <>
       <Box sx={{ width: 300, height: 300 }}>
+        <Button onClick={toggleAuthStatus}>{isRegistered ? "Create account" : "Already registered ?"}</Button>
         <FormControl variant="standard">
           <AuthInput
             label="username"

@@ -12,14 +12,14 @@ const withAuthentication =
 
     const setDataFromUser = async () => {
       const user = await fetchUser()
-      if (user.games.length && !gameData.id) {
+      if (user.games.length) {
         handleSetGame(user.games.reverse()[0])
       }
     }
     if (token) {
       useEffect(() => {
-        if (!userData.id) {
-          setDataFromUser().then(setToken)
+        if (!userData.id || !gameData.id) {
+          setDataFromUser()
         }
       }, [])
       return <Component {...(props as P)} />;

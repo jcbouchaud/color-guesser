@@ -17,7 +17,7 @@ const initialState = {
 export const GameContext = createContext<GameContextProps>({
   gameData: initialState,
   handleIncrement: () => {},
-  handleReset: () => {},
+  handleResetGame: () => {},
   handleCreateGame: async () => {},
   handleSetGame: () => {},
   handleSubmitAnswer: () => {},
@@ -29,19 +29,19 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
   const handleIncrement = () => {
     dispatch({ type: GameActionKind.INCREMENT_SCORE });
   };
-  const handleReset = () => {
-    dispatch({ type: GameActionKind.RESET_SCORE });
+  const handleResetGame = () => {
+    dispatch({ type: GameActionKind.RESET_STATE, payload: initialState });
   };
 
   const handleCreateGame = async (userId: string) => {
     const game = await api.createGame(userId);
-    const newGame = setGame(game)
+    const newGame = setGame(game);
     dispatch({ type: GameActionKind.CREATE_GAME, payload: newGame });
   };
 
   const handleSetGame = (game: GameData) => {
-    const updatedGame: GameData = setGame(game)
-    console.log(updatedGame)
+    const updatedGame: GameData = setGame(game);
+    console.log(updatedGame);
     dispatch({ type: GameActionKind.SET_GAME, payload: updatedGame });
   };
 
@@ -52,7 +52,7 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
       choices: gameData.round.choices,
     });
 
-    const updatedGame: GameData = setGame(game)
+    const updatedGame: GameData = setGame(game);
 
     dispatch({ type: GameActionKind.SET_NEW_ROUND, payload: updatedGame });
   };
@@ -60,7 +60,7 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
   const value = {
     gameData,
     handleIncrement,
-    handleReset,
+    handleResetGame,
     handleCreateGame,
     handleSetGame,
     handleSubmitAnswer,

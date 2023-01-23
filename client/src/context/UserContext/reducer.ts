@@ -13,6 +13,8 @@ export const UserReducer = (state: UserDataType, action: UserAction) => {
           tokenType: bearerSplit[0],
         },
       };
+    case UserActionKind.RESET_STATE:
+      return {...action.payload}
     default:
       return state;
   }

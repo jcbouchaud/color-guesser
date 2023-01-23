@@ -13,6 +13,7 @@ export interface UserDataType {
 export enum UserActionKind {
   SET_USER_INFOS = "SET_USER_INFOS",
   SET_TOKEN = "",
+  RESET_STATE = "RESET_STATE"
 }
 
 export interface UserAction {
@@ -23,6 +24,7 @@ export interface UserAction {
 export interface UserContextProps {
   userData: UserDataType;
   handleAuth: (username: string, password: string, registered: boolean) => void;
-  fetchUser: () => Promise<any>
-  setToken: () => void
+  fetchUser: () => Promise<any>;
+  setToken: () => void;
+  handleResetUser: () => void
 }

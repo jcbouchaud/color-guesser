@@ -46,7 +46,9 @@ def test_update_game_lost_round(fake_user_token, fake_game, fake_lost_round):
 
 
 def test_login(fake_user, password):
-    response = client.post("/auth/login/", data={"username": fake_user.username, "password": password}, headers={"Content-Type": "application/x-www-form-urlencoded"})
+    response = client.post("/auth/login/",
+                           data={"username": fake_user.username, "password": password},
+                           headers={"Content-Type": "application/x-www-form-urlencoded"})
 
     assert response.status_code == 200
     assert AuthenticatedUser.parse_obj(response.json())

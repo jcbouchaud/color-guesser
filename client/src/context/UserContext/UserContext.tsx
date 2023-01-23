@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { UserReducer } from "./reducer";
 import { UserContextProps, UserActionKind, UserDataType } from "./types";
 import api from "../../services/api";
+import { GameActionKind } from "../GameContext/types";
 
 const initialState: UserDataType = {
   id: "",
@@ -20,6 +21,7 @@ UserContext = createContext<UserContextProps>({
   handleAuth: async () => {},
   fetchUser: async () => {},
   setToken: () => {},
+  handleResetUser: () => {}
 });
 
 const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -58,7 +60,13 @@ const UserProvider = ({ children }: { children: JSX.Element }) => {
     dispatch({ type: UserActionKind.SET_TOKEN, payload: token });
   };
 
-  const value = { userData, handleAuth, fetchUser, setToken };
+  const handleResetUser = () => {
+    window.localStorage.removeItem("user_id")
+    window.localStorage.removeItem("jwt_token")
+    dispatch({ type: UserActionKind.RESET_STATE, payload: initialState });
+  };
+
+  const value = { userData, handleAuth, fetchUser, setToken, handleResetUser };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

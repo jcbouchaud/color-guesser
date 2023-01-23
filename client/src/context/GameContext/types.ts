@@ -6,7 +6,7 @@ export interface GameData {
 
 export enum GameActionKind {
   INCREMENT_SCORE = "INCREMENT_SCORE",
-  RESET_SCORE = "RESET_SCORE",
+  RESET_STATE = "RESET_STATE",
   CREATE_GAME = "CREATE_GAME",
   SET_GAME = "SET_GAME",
   SET_USER_ANSWER = "SET_USER_ANSWER",
@@ -21,7 +21,7 @@ export interface GameAction {
 export interface GameContextProps {
   gameData: GameData;
   handleIncrement: () => void;
-  handleReset: () => void;
+  handleResetGame: () => void;
   handleCreateGame: (userId: string) => void;
   handleSetGame: (game: GameData) => void;
   handleSubmitAnswer: (answer: string) => void;

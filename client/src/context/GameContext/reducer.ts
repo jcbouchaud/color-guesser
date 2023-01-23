@@ -4,8 +4,8 @@ export const GameReducer = (state: GameData, action: GameAction) => {
   switch (action.type) {
     case GameActionKind.INCREMENT_SCORE:
       return { ...state, score: state.score + 1 };
-    case GameActionKind.RESET_SCORE:
-      return { ...state, score: 0 };
+    case GameActionKind.RESET_STATE:
+      return { ...action.payload };
     case GameActionKind.CREATE_GAME:
       return { ...state, ...action.payload };
     case GameActionKind.SET_GAME:

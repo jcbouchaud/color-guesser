@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import withAuthentication from "../../hocs/withAuthentication";
+import UserRow from "./UserRow/UserRow";
+import Header from "../../components/Header/Header";
 
-interface UserWithScore {
+export interface UserWithScore {
   username: string;
   bestScore: number;
 }
@@ -19,17 +21,12 @@ const WelcomePage = () => {
   }, []);
 
   return (
-    <>
-      <div>
-        {results.map((result) => {
-          return (
-            <div>
-              {result.username}: {result.bestScore}
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div>
+      <Header/>
+      {results.map((result) => {
+        return <UserRow {...result} />
+      })}
+    </div>
   );
 };
 
