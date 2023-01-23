@@ -20,3 +20,8 @@ class User(UserCreate, CamelResponse):
 class AuthenticatedUser(User, CamelResponse):
     token: Token
 
+
+class DisplayUser(CamelResponse):
+    username: str
+    best_score: int
+

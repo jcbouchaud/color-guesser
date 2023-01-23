@@ -1,4 +1,5 @@
 from fastapi import HTTPException
+from sqlalchemy import desc
 from sqlalchemy.orm import Session
 from .base import BaseService
 from app.models.users import User as UserModel
@@ -13,5 +14,13 @@ class UsersService(BaseService):
         if user is None:
             raise HTTPException(status_code=404, detail="Not Found")
         return user
+
+    def list_top_ten(self):
+        users = self.db_session.query(self.model)\
+            .filter(self.model.best_score > 0)\
+            .order_by(desc("best_score"))\
+            .limit(10)\
+            .all()
+        return users
 
 

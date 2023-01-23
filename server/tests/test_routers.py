@@ -58,3 +58,9 @@ def test_register(password):
 
     assert response.status_code == 201
     assert AuthenticatedUser.parse_obj(response.json())
+
+
+def test_ranking(fake_user, fake_user_token):
+    response = client.get("/users/", headers={"Authorization": fake_user_token})
+    assert response.status_code == 200
+    assert response.json()[0]["bestScore"] >= response.json()[-1]["bestScore"]
