@@ -2,6 +2,7 @@ import { useGameContext } from "../../context/GameContext/GameContext";
 import { useUserContext } from "../../context/UserContext/UserContext";
 import styled from "styled-components";
 import HeaderLink, { StyledHeaderLink } from "./HeaderLink/HeaderLink";
+import { Link } from "react-router-dom";
 
 const CustomHeader = styled.header`
   width: 100%;
@@ -21,7 +22,7 @@ const Header = () => {
     { path: "/", name: "<top 10>" },
   ];
 
-  const logout = () => {
+  const handleLogout = () => {
     handleResetGame();
     handleResetUser();
   };
@@ -30,7 +31,7 @@ const Header = () => {
       {paths.map((x, index) => (
         <HeaderLink key={index} path={x.path} name={x.name} />
       ))}
-      <StyledHeaderLink onClick={() => logout()} color="purple">{"<logout>"}</StyledHeaderLink>
+      <StyledHeaderLink onClick={() => handleLogout()} color="purple"><Link to={"/"}>{"<logout>"}</Link></StyledHeaderLink>
     </CustomHeader>
   );
 };
