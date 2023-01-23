@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import AuthInput from "./AuthInput/AuthInput";
@@ -8,6 +8,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { useUserContext } from "../../context/UserContext/UserContext";
 import { Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import Page from "../../components/Page/Page";
 
 export interface formStateInterface {
   username: string;
@@ -51,26 +52,22 @@ const AuthPage = () => {
   }
 
   return (
-    <>
+    <Page>
       <Box sx={{ width: 300, height: 300 }}>
-        <Button onClick={toggleAuthStatus}>{isRegistered ? "Create account" : "Already registered ?"}</Button>
         <FormControl variant="standard">
           <AuthInput
             label="username"
             formState={formState}
             setFormState={setFormState}
-          >
-            <AccountCircle sx={{ mr: 1, my: 0.5 }} />
-          </AuthInput>
+          />
           <AuthInput
             label="password"
             formState={formState}
             setFormState={setFormState}
-          >
-            <PasswordIcon sx={{ mr: 1, my: 0.5 }} />
-          </AuthInput>
+          />
           {userData.token.accessToken}
           <LoadingButton
+            sx={{width: "300px"}}
             onClick={submitAuth}
             variant="outlined"
             loading={loading}
@@ -78,9 +75,12 @@ const AuthPage = () => {
           >
             {isRegistered ? "Login" : "Register"}
           </LoadingButton>
+          <Button onClick={toggleAuthStatus}>
+            {isRegistered ? "New member ?" : "Already registered ?"}
+          </Button>
         </FormControl>
       </Box>
-    </>
+    </Page>
   );
 };
 

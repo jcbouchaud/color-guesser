@@ -2,7 +2,6 @@ import React, { createContext, useContext, useReducer } from "react";
 import { UserReducer } from "./reducer";
 import { UserContextProps, UserActionKind, UserDataType } from "./types";
 import api from "../../services/api";
-import { GameActionKind } from "../GameContext/types";
 
 const initialState: UserDataType = {
   id: "",

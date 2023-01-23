@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useGameContext } from "../../../context/GameContext/GameContext";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import CustomColorButton from "../../../components/CustomColorButton/CustomColorButton";
+import styled from "styled-components";
+
+const StyledStack = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: auto;
+    margin-bottom: auto;
+  `
 
 const OptionsList = () => {
   const { gameData, handleSubmitAnswer } = useGameContext();
@@ -16,31 +25,16 @@ const OptionsList = () => {
     if (gameData.round.rightAnswer) {
       setColor(gameData.round.rightAnswer)
     } else {
-      setColor("#111111")
+      setColor("purple")
     }
   }, [gameData.round.rightAnswer])
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="center"
-      spacing={3}
-      sx={{ margin: "35px" }}
-    >
+    <StyledStack  >
       {gameData.round.choices.map((x, index) => (
-        <Button
-          sx={{
-            borderColor: color,
-            color: color
-          }}
-          key={index}
-          variant="outlined"
-          onClick={() => onSubmit(x)}
-        >
-          {x}
-        </Button>
+        <CustomColorButton key={index} text={x} color={color} onClick={() => onSubmit(x)}/>
       ))}
-    </Stack>
+    </StyledStack>
   );
 };
 

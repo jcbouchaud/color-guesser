@@ -14,6 +14,7 @@ export const UserReducer = (state: UserDataType, action: UserAction) => {
         },
       };
     case UserActionKind.RESET_STATE:
+      console.log("test1")
       return {...action.payload}
     default:
       return state;

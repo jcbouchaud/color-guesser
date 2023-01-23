@@ -41,7 +41,6 @@ const GameProvider = ({ children }: { children: JSX.Element }) => {
 
   const handleSetGame = (game: GameData) => {
     const updatedGame: GameData = setGame(game);
-    console.log(updatedGame);
     dispatch({ type: GameActionKind.SET_GAME, payload: updatedGame });
   };
 

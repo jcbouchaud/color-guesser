@@ -1,6 +1,6 @@
-import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import WelcomePage from "./pages/WelcomePage/WelcomePage";
+import styled from "styled-components";
+import WelcomePage from "./pages/RankingPage/RankingPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import GamePage from "./pages/GamePage/GamePage";
 import GameProvider from "./context/GameContext/GameContext";
@@ -17,19 +17,24 @@ const router = createBrowserRouter([
   },
   {
     path: "/play/",
-    element: (
-      <GameProvider>
-        <GamePage />
-      </GameProvider>
-    ),
+    element: <GamePage />,
   },
 ]);
 
+const StyledApp = styled.div`
+  min-height: 80vh;
+  width: 100vw;
+`;
+
 function App() {
   return (
-    <UserProvider>
-      <RouterProvider router={router}/>
-    </UserProvider>
+    <StyledApp>
+      <UserProvider>
+        <GameProvider>
+          <RouterProvider router={router} />
+        </GameProvider>
+      </UserProvider>
+    </StyledApp>
   );
 }
 

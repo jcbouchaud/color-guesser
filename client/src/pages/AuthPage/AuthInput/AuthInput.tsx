@@ -1,26 +1,29 @@
 import React, { ChangeEvent, SetStateAction } from "react";
-import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import {formStateInterface} from "../AuthPage"
+import styled from "styled-components";
 
 interface AuthInputProps {
   label: string;
   formState: formStateInterface;
   setFormState:SetStateAction<any>;
-  children: JSX.Element;
 }
 
-const AuthInput = ({ label, formState, setFormState, children }: AuthInputProps) => {
+
+const StyledAuthInput = styled.div`
+  margin-bottom: 10px;
+`
+
+const AuthInput = ({ label, formState, setFormState }: AuthInputProps) => {
 
   const setStateFromInput = (event: ChangeEvent<HTMLInputElement>) => {
     setFormState({...formState, [label]: event.target.value})
   }
 
   return (
-    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-      {children}
-      <TextField id="input-with-sx" label={label} variant="standard" onChange={setStateFromInput}/>
-    </Box>
+    <StyledAuthInput>
+      <TextField sx={{width: "300px"}} label={label} variant="standard" onChange={setStateFromInput}/>
+    </StyledAuthInput>
   );
 };
 

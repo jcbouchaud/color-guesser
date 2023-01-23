@@ -1,16 +1,30 @@
-import React from "react";
 import { useGameContext } from "../../../context/GameContext/GameContext";
-import Box from "@mui/material/Box";
+import styled from "styled-components";
+
+const StyledScore = styled.div`
+  width: 100%;
+  font-size: 150px;
+  color: white;
+  text-align: center;
+`;
+
+const StyledThumbnail = styled.div`
+  display: flex;
+  align-items: center;
+  height: 200px;
+  border-radius: 5px;
+  background-color: ${(props) => props.color};
+`;
 
 const Thumbnail = () => {
   const { gameData } = useGameContext();
-  return <Box
-    sx={{
-      backgroundColor: gameData.round.rightAnswer ? gameData.round.rightAnswer : "#111111",
-      borderRadius: "5px",
-      height: "200px"
-    }}
-  />;
+  return (
+    <StyledThumbnail color={gameData.round.rightAnswer || "purple"}>
+      <StyledScore color={gameData.round.rightAnswer || "purple"}>
+        {gameData.score}
+      </StyledScore>
+    </StyledThumbnail>
+  );
 };
 
 export default Thumbnail;

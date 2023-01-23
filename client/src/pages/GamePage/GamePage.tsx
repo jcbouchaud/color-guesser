@@ -1,16 +1,12 @@
 import withAuthentication from "../../hocs/withAuthentication";
 import Player from "./Player/Player";
-import StartGameScreen from "./StartGameScreen/StartGameScreen";
-import { useGameContext } from "../../context/GameContext/GameContext";
-import Grid from "@mui/material/Grid";
-import Header from "../../components/Header/Header";
+import Page from "../../components/Page/Page";
 
 const GamePage = () => {
   return (
-    <Grid container>
-      <Header/>
+    <Page>
       <Player />
-    </Grid>
+    </Page>
   );
 };
 
