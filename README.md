@@ -15,7 +15,7 @@ Run */scripts/test.py* does the same + runs tests
 
 ## Db admin
 
-pgadmin is running on *localhost:3000*\
+pgadmin is running on *localhost:5050*\
 *email: admin@pgadmin.org, pwd: admin*
 
 ## API docs
