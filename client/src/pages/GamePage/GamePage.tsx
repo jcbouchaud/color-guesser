@@ -1,13 +1,16 @@
 import withAuthentication from "../../hocs/withAuthentication";
 import Player from "./Player/Player";
 import Page from "../../components/Page/Page";
-import { useGameContext } from "../../context/GameContext/GameContext";
 
-const GamePage = () => {
-  const { gameData } = useGameContext();
+
+interface GamePageInterface {
+  loader: boolean
+}
+
+const GamePage = ({ loader }: GamePageInterface) => {
 
   return (
-    <Page loading={gameData.id ? false : true}>
+    <Page loading={loader}>
       <Player />
     </Page>
   );

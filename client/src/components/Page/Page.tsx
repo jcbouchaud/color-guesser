@@ -23,19 +23,11 @@ interface PageProps {
 
 const Page = ({ children, loading }: PageProps) => {
   const { gameData } = useGameContext();
-  if (!loading) {
-    return (
-      <StyledPaged color={gameData.round.rightAnswer || "purple"}>
-        {children}
-      </StyledPaged>
-    );
-  } else {
-    return (
-      <StyledPaged color={gameData.round.rightAnswer || "purple"}>
-        <CircularProgress />
-      </StyledPaged>
-    );
-  }
+  return (
+    <StyledPaged color={gameData.round.rightAnswer || "purple"}>
+      {loading ? <CircularProgress /> : children}
+    </StyledPaged>
+  );
 };
 
 export default Page;

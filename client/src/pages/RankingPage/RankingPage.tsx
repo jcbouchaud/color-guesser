@@ -16,7 +16,7 @@ const StyledTopText = styled.div`
   color: white;
   font-weight: bold;
   font-size: 30px;
-  font-family: "Roboto Light";
+  font-family: "Roboto Light" !important;
   text-align: center;
   margin-bottom: 20px;
 `;
