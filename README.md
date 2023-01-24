@@ -10,8 +10,8 @@ React app is running on *localhost:3000*
 
 ## Scripts
 
-Run */scripts/run.sh* to build de whole app from scratch (kills volumes)\
-Run */scripts/test.sh* does the same + runs tests
+Run *./scripts/run.sh* to build de whole app from scratch (kills volumes)\
+Run *./scripts/test.sh* does the same + runs tests
 
 ## Db admin
 
