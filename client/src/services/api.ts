@@ -1,15 +1,19 @@
 import axios from "axios";
 import { Round } from "../context/GameContext/types";
 
+const instance = axios.create({
+  baseURL: 'http://localhost:8000',
+});
+
 const api = {
   login: async (username: string, password: string) => {
-    const URL = "http://localhost:8000/auth/login/";
+    const URL = "/auth/login/";
     const bodyFormData = new FormData();
     bodyFormData.append("username", username);
     bodyFormData.append("password", password);
     const headers = { "Content-Type": "multipart/form-data" };
 
-    return await axios
+    return await instance
       .post(URL, bodyFormData, { headers: headers })
       .then((res) => {
         if (res.status === 200) {
@@ -19,9 +23,9 @@ const api = {
       .catch((err) => err);
   },
   register: async (username: string, password: string) => {
-    const URL = "http://localhost:8000/auth/register/";
+    const URL = "/auth/register/";
 
-    return await axios
+    return await instance
       .post(URL, { username, password })
       .then((res) => {
         if (res.status === 201) {
@@ -31,9 +35,9 @@ const api = {
       .catch((err) => err);
   },
   createGame: async (userId: string) => {
-    const URL = "http://localhost:8000/games/";
+    const URL = "/games/";
 
-    return await axios
+    return await instance
       .post(
         URL,
         { user_id: userId },
@@ -47,9 +51,9 @@ const api = {
       .catch((err) => err);
   },
   submitAnswer: async (gameId: string, round: Round) => {
-    const URL = "http://localhost:8000/games/";
+    const URL = "/games/";
 
-    return await axios
+    return await instance
       .patch(
         URL,
         {
@@ -73,9 +77,9 @@ const api = {
   },
   fetchUser: async () => {
     const userId = window.localStorage.getItem("user_id");
-    const URL = `http://localhost:8000/users/${userId}/`;
+    const URL = `/users/${userId}/`;
 
-    return await axios
+    return await instance
       .get(URL, {
         headers: { Authorization: window.localStorage.getItem("jwt_token") },
       })
@@ -87,9 +91,9 @@ const api = {
       .catch((err) => err);
   },
   fetchTopTen: async () => {
-    const URL = `http://localhost:8000/users/`;
+    const URL = `/users/`;
 
-    return await axios
+    return await instance
       .get(URL, {
         headers: { Authorization: window.localStorage.getItem("jwt_token") },
       })
