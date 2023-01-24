@@ -16,6 +16,9 @@ export const StyledFooterLink = styled.div`
     text-decoration: none !important;
     font-family: "Roboto Light";
     color: ${(props) => props.color};
+    &:hover {
+      font-weight: bold;
+    }
   }
 `;
 

@@ -19,7 +19,7 @@ const StyledGameContainer = styled.div`
   justify-items: center;
   align-content: center;
   height: 300px;
-  width: 400px;
+  width: 300px;
   max-width: 100%;
   padding: 10px;
   border-radius: 5px;

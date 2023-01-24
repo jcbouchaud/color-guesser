@@ -16,6 +16,7 @@ const StyledUserRow = styled.div`
   background-color: white;
 `;
 
+
 const UserRow = ({ username, bestScore }: UserWithScore) => {
   return (
     <StyledUserRow color={"purple"}>

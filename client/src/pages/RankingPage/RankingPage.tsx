@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import withAuthentication from "../../hocs/withAuthentication";
 import UserRow from "./UserRow/UserRow";
@@ -28,21 +28,25 @@ export interface UserWithScore {
 
 const RankingPage = () => {
   const [results, setResults] = useState<UserWithScore[]>([]);
-
-  const handleFetchUsers = useCallback(async () => {
-    return await api.fetchTopTen();
-  }, []);
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
-    handleFetchUsers().then((res) => setResults(res));
-  }, [handleFetchUsers]);
+    const handleFetchUsers = async () => {
+      setLoader(true)
+      return await api.fetchTopTen();
+    };
+
+    handleFetchUsers().then((res) => {
+      setResults(res);
+      setLoader(false)
+    });
+
+  }, []);
 
   return (
-    <Page>
+    <Page loading={loader}>
       <StyledUsersList>
-        <StyledTopText>
-          TOP 10
-        </StyledTopText>
+        <StyledTopText>TOP 10</StyledTopText>
         {results.map((result, index) => {
           return <UserRow key={index} {...result} />;
         })}
