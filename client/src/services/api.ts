@@ -1,15 +1,11 @@
 import axios, { AxiosInstance } from "axios";
 import { Round } from "../context/GameContext/types";
 
-const instance = axios.create({
-  baseURL: "http://localhost:8000",
-});
-
 class ApiService {
   instance: AxiosInstance;
 
-  constructor(instance: AxiosInstance) {
-    this.instance = instance;
+  constructor(baseURL: string) {
+    this.instance = axios.create({baseURL});
   }
   login(username: string, password: string) {
     const bodyFormData = new FormData();
@@ -88,5 +84,5 @@ class ApiService {
   }
 }
 
-const api = new ApiService(instance);
+const api = new ApiService("http://localhost:8000");
 export default api
