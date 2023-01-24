@@ -13,4 +13,4 @@ COPY ./alembic.ini /code/alembic.ini
 RUN mkdir -p ./alembic/versions
 COPY ./alembic /code/alembic
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8000"]
