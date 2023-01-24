@@ -3,7 +3,7 @@
 ## Setup
 
 > docker-compose up --build -d\
-> docker-compose exec server alembic revision --autogenerate "First migration"\
+> docker-compose exec server alembic revision --autogenerate\
 > docker exec server alembic upgrade head
 
 React app is running on *localhost:3000*
