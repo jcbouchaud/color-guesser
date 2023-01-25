@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useGameContext } from "../../../context/GameContext/GameContext";
-import CustomColorButton from "../../../components/CustomColorButton/CustomColorButton";
 import styled from "styled-components";
+import CustomButton from "../../../components/CustomButton/CustomButton";
 
 const StyledStack = styled.div`
     display: flex;
@@ -32,7 +32,7 @@ const OptionsList = () => {
   return (
     <StyledStack  >
       {gameData.round.choices.map((x, index) => (
-        <CustomColorButton key={index} text={x} color={color} onClick={() => onSubmit(x)}/>
+        <CustomButton key={index} onClick={() => onSubmit(x)} color={color}>{x}</CustomButton>
       ))}
     </StyledStack>
   );

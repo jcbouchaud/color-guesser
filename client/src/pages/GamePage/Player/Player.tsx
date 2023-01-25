@@ -3,7 +3,7 @@ import Thumbnail from "../Thumbnail/Thumbnail";
 import OptionsList from "../OptionsList/OptionsList";
 import { useGameContext } from "../../../context/GameContext/GameContext";
 import { useUserContext } from "../../../context/UserContext/UserContext";
-import CustomColorButton from "../../../components/CustomColorButton/CustomColorButton";
+import CustomButton from "../../../components/CustomButton/CustomButton";
 
 const StyledPlayer = styled.div`
   display: flex;
@@ -41,11 +41,12 @@ const Player = () => {
         {gameData.id ? (
           <OptionsList />
         ) : (
-          <CustomColorButton
-            onClick={startGame}
+          <CustomButton
+            onClick={() => startGame()}
             color={gameData.round.rightAnswer || "purple"}
-            text="start game"
-          />
+          >
+            start game
+          </CustomButton>
         )}
       </StyledGameContainer>
     </StyledPlayer>

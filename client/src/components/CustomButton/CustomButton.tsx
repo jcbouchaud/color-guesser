@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const StyledCustomButton = styled.button`
@@ -17,14 +18,18 @@ const StyledCustomButton = styled.button`
   }
 `;
 
-interface ButtonProps {
-  text: string;
+interface CustomButtonProps {
   color: string;
-  onClick: () => void;
 }
 
-const CustomColorButton = ({ onClick, color, text }: ButtonProps) => {
-  return <StyledCustomButton onClick={onClick} color={color}>{text}</StyledCustomButton>;
+const CustomButton = (
+  props: CustomButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
+  return (
+    <StyledCustomButton color={props.color} onClick={props.onClick}>
+      {props.children}
+    </StyledCustomButton>
+  );
 };
 
-export default CustomColorButton;
+export default CustomButton;
