@@ -1,4 +1,4 @@
-import React from "react";
+import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
 const StyledCustomButton = styled.button`
@@ -23,7 +23,7 @@ interface CustomButtonProps {
 }
 
 const CustomButton = (
-  props: CustomButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  props: CustomButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
 ) => {
   return (
     <StyledCustomButton color={props.color} onClick={props.onClick}>
